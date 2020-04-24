@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
 
+
 const Todo = props => {
 
   const markCompletionStatus = (e) => {
@@ -47,22 +48,23 @@ export default class TodosList extends Component {
 
   constructor(props) {
     super(props)
-    this.state = {todos: []}
+    this.state = {todos: [], focus: false}
   }
 
   focusModeEnabled() {
     const urlParams = new URLSearchParams(window.location.search)
     if (urlParams.get('focus')) {
-      console.log('focus mode enabled')
-    } else {
-      console.log('POWERPEG ENABLED')
+      return true
     }
-
   }
 
   componentDidMount() {
-    this.focusModeEnabled()
-    axios.get('http://localhost:4000/todos/')
+    let endpoint = "http://localhost:4000/todos/"
+    if (this.focusModeEnabled()) {
+      endpoint += "?top=true"
+      this.setState({focus: true})
+    }
+    axios.get(endpoint)
       .then(response => {
         this.setState({ todos: response.data })
       })
@@ -80,7 +82,13 @@ export default class TodosList extends Component {
   render () {
     return (
       <div>
-        <h3>Fiona's Todos</h3>
+        <h3>Fiona's Todos  
+          <small style={{fontSize: 12 + "px"}}>&nbsp;
+            {!this.state.focus ?
+            <a href="/?focus=true">focus?</a>
+            : <a href="/">full list</a>}
+          </small>
+        </h3>
         {this.state.todos.length ?
         <table className="table table-striped" style={{ marginTop: 20 }}>
           <thead>

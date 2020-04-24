@@ -32,8 +32,7 @@ export default class DeleteTodo extends Component {
 
   onSubmit(e) {
     e.preventDefault()
-    console.log("form submitted")
-
+    
     axios.post('http://localhost:4000/todos/delete/' + this.props.match.params.id)
       .then(res => console.log(res.data))
 

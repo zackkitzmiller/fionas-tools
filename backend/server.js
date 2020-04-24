@@ -4,6 +4,7 @@ const bodyParser = require('body-parser')
 const cors = require('cors')
 const mongoose = require('mongoose')
 const todoRoutes = express.Router()
+const url = require('url')
 const PORT = 4000
 
 let Todo = require('./models/todo.model')
@@ -38,6 +39,11 @@ todoRoutes.route('/').get(function(req, res) {
     if (err) {
       console.log(err)
     } else {
+      const queryObject = url.parse(req.url, true).query
+      console.log(queryObject)
+      if (queryObject['top']) {
+        todos = topTodo(todos)
+      }
       res.json(todos)
     }
   })

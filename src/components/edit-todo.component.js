@@ -73,7 +73,7 @@ export default class EditTodo extends Component {
     axios.post('http://localhost:4000/todos/update/' + this.props.match.params.id, obj)
       .then(res => console.log(res.data))
 
-    this.props.history.push('/')
+    window.location.href = '/'
   }
 
   render() {
@@ -105,6 +105,7 @@ export default class EditTodo extends Component {
                       id="priorityLow"
                       onChange={this.onChangeTodoPriority}
                       checked={this.state.todo_priority === 'Low'}
+                      value="Low"
                       />
               <label className="form-check-label">Low</label>
             </div>            
@@ -113,6 +114,7 @@ export default class EditTodo extends Component {
                       type="radio"
                       name="priorityOptions"
                       id="priorityMedium"
+                      value="Medium"
                       checked={this.state.todo_priority === 'Medium'}
                       onChange={this.onChangeTodoPriority}
                       />
@@ -123,7 +125,8 @@ export default class EditTodo extends Component {
                       type="radio"
                       name="priorityOptions"
                       id="priorityHigh"
-                      checked={this.state.todo_priority === 'High'}
+                      value="High"
+                      defaultChecked={this.state.todo_priority === 'High'}
                       onChange={this.onChangeTodoPriority}
                       />
               <label className="form-check-label">High</label>
