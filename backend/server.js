@@ -24,14 +24,15 @@ function topTodo(todos) {
   const highs = incomplete.filter(todo => todo.todo_priority === 'High')
   const meds = incomplete.filter(todo => todo.todo_priority === 'Medium')
   const lows = incomplete.filter(todo => todo.todo_priority === 'Low')
+  let resp = []
   if (highs.length) {
-    return [highs[0]]
+    resp = highs[0]
   } else if (meds.length) {
-    return [meds[0]]
+    resp = meds[0]
   } else if (lows.length) {
-    return [lows[0]]
+    resp = lows[0]
   }
-  return []
+  return [resp]
 }
 
 todoRoutes.route('/').get(function(req, res) {
