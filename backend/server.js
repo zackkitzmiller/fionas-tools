@@ -25,11 +25,11 @@ function topTodo(todos) {
   const meds = incomplete.filter(todo => todo.todo_priority === 'Medium')
   const lows = incomplete.filter(todo => todo.todo_priority === 'Low')
   if (highs.length) {
-    return highs
+    return [highs[0]]
   } else if (meds.length) {
-    return meds
+    return [meds[0]]
   } else if (lows.length) {
-    return lows
+    return [lows[0]]
   }
   return []
 }
