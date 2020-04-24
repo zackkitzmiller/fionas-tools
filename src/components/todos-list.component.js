@@ -2,24 +2,46 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
 
-const Todo = props => (
-  <tr>
-    <td className={props.todo.todo_completed ? 'completed' : ''}>
-      {props.todo.todo_description}
-    </td>
-    <td className={props.todo.todo_completed ? 'completed' : ''}>
-      {props.todo.todo_responsible}
-    </td>
-    <td className={props.todo.todo_completed ? 'completed' : ''}>
-      {props.todo.todo_priority}
-    </td>
-    <td>
-      <Link to={"/edit/" + props.todo._id}>Edit</Link>
-      &nbsp; | &nbsp;
-      <Link to={"/delete/" + props.todo._id}>Delete</Link>
-    </td>
-  </tr>
-)
+const Todo = props => {
+
+  const markCompletionStatus = (e) => {
+    e.preventDefault()
+    const obj = {
+      todo_description: props.todo.todo_description,
+      todo_responsible: props.todo.todo_responsible,
+      todo_priority: props.todo.todo_priority,
+      todo_completed: !props.todo.todo_completed
+    }
+
+    axios.post('http://localhost:4000/todos/update/' + props.todo._id, obj)
+      .then(window.location.reload(false))
+
+  }
+
+  return (
+    <tr>
+      <td className={props.todo.todo_completed ? 'completed' : ''}>
+        {props.todo.todo_description}
+      </td>
+      <td className={props.todo.todo_completed ? 'completed' : ''}>
+        {props.todo.todo_responsible}
+      </td>
+      <td className={props.todo.todo_completed ? 'completed' : ''}>
+        {props.todo.todo_priority}
+      </td>
+      <td>
+        <Link to={"/edit/" + props.todo._id}>Edit</Link>
+        &nbsp; | &nbsp;
+        <Link to={"/mark-status/" + props.todo._id} onClick={markCompletionStatus}>
+          {props.todo.todo_completed ? 'Undo' : 'Done'}
+        </Link>
+        &nbsp; | &nbsp;
+        <Link to={"/delete/" + props.todo._id}>Delete</Link>
+      </td>
+    </tr>
+  )
+}
+
 
 export default class TodosList extends Component {
 
@@ -28,7 +50,18 @@ export default class TodosList extends Component {
     this.state = {todos: []}
   }
 
+  focusModeEnabled() {
+    const urlParams = new URLSearchParams(window.location.search)
+    if (urlParams.get('focus')) {
+      console.log('focus mode enabled')
+    } else {
+      console.log('POWERPEG ENABLED')
+    }
+
+  }
+
   componentDidMount() {
+    this.focusModeEnabled()
     axios.get('http://localhost:4000/todos/')
       .then(response => {
         this.setState({ todos: response.data })
@@ -48,6 +81,7 @@ export default class TodosList extends Component {
     return (
       <div>
         <h3>Fiona's Todos</h3>
+        {this.state.todos.length ?
         <table className="table table-striped" style={{ marginTop: 20 }}>
           <thead>
             <tr>
@@ -61,6 +95,7 @@ export default class TodosList extends Component {
             { this.todoList() }
           </tbody>
         </table>
+        : <p>All Done! Add a <Link to="/create">Todo?</Link></p>}
       </div>
     )
   }

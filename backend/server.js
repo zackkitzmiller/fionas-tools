@@ -18,6 +18,21 @@ connection.once('open', function() {
   console.log("MongoDB connection established")
 })
 
+function topTodo(todos) {
+  const incomplete = todos.filter(todo => todo.todo_completed == false)
+  const highs = incomplete.filter(todo => todo.todo_priority === 'High')
+  const meds = incomplete.filter(todo => todo.todo_priority === 'Medium')
+  const lows = incomplete.filter(todo => todo.todo_priority === 'Low')
+  if (highs.length) {
+    return highs
+  } else if (meds.length) {
+    return meds
+  } else if (lows.length) {
+    return lows
+  }
+  return []
+}
+
 todoRoutes.route('/').get(function(req, res) {
   Todo.find(function(err, todos) {
     if (err) {
@@ -25,6 +40,12 @@ todoRoutes.route('/').get(function(req, res) {
     } else {
       res.json(todos)
     }
+  })
+})
+
+todoRoutes.route('/top').get(function(req, res) {
+  Todo.find(function(err, todos) {
+    res.json(topTodo(todos))
   })
 })
 
