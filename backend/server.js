@@ -40,7 +40,6 @@ todoRoutes.route('/').get(function(req, res) {
       console.log(err)
     } else {
       const queryObject = url.parse(req.url, true).query
-      console.log(queryObject)
       if (queryObject['top']) {
         todos = topTodo(todos)
       }

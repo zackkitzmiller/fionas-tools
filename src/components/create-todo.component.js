@@ -40,11 +40,6 @@ export default class CreateTodo extends Component {
   onSubmit(e) {
     e.preventDefault()
 
-    console.log("form submitted")
-    console.log(`Desc: ${this.state.todo_description}`)
-    console.log(`Resp: ${this.state.todo_responsible}`)
-    console.log(`Pri: ${this.state.todo_priority}`)
-
     const newTodo = {
       todo_description: this.state.todo_description,
       todo_responsible: this.state.todo_responsible,
