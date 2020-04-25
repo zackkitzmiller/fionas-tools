@@ -11,3 +11,4 @@ handlers:
 
 env_variables:
   BOOT_SCRIPT: 'react-scripts start'
+  REACT_APP_API_BASE_URL: 'https://api-dot-fionas-todos-275302.ue.r.appspot.com/'
