@@ -1,0 +1,11 @@
+service: api
+runtime: nodejs10
+
+handlers:
+  - url: /.*
+    script: auto
+
+env_variables:
+  BOOT_SCRIPT: 'node backend/server.js'
+  MONGO_DSN: 'mongodb+srv://fiona-home-learning:wmbapPJXuW0zZQVR@atlas-cluster-1-6c5og.gcp.mongodb.net/test?retryWrites=true&w=majority
+' SERVER_PORT: 80
