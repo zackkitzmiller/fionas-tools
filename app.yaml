@@ -8,6 +8,7 @@ handlers:
     static_dir: build
   - url: /static
     static_dir: build/static
+    expiration: '10s'
 
 env_variables:
   BOOT_SCRIPT: 'react-scripts start'
