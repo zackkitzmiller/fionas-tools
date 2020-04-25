@@ -4,8 +4,10 @@ handlers:
   - url: /
     static_files: build/index.html
     upload: build/index.html
+    expiration: '10s'
   - url: /
     static_dir: build
+    expiration: '10s'
   - url: /static
     static_dir: build/static
     expiration: '10s'
