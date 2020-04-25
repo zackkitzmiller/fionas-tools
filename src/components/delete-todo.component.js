@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+import { API_BASE_URL } from '../lib/configuration'
 
 export default class DeleteTodo extends Component {
   constructor(props) {
@@ -16,7 +17,7 @@ export default class DeleteTodo extends Component {
   }
 
   componentDidMount() {
-    axios.get('http://localhost:4000/todos/' + this.props.match.params.id)
+    axios.get(API_BASE_URL + '/todos/' + this.props.match.params.id)
       .then(response => {
         this.setState({
           todo_description: response.data.todo_description,
@@ -33,7 +34,7 @@ export default class DeleteTodo extends Component {
   onSubmit(e) {
     e.preventDefault()
     
-    axios.post('http://localhost:4000/todos/delete/' + this.props.match.params.id)
+    axios.post(API_BASE_URL + '/todos/delete/' + this.props.match.params.id)
       .then(res => console.log(res.data))
 
     this.props.history.push('/')

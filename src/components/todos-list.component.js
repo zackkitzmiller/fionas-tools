@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
-
+import { API_BASE_URL } from '../lib/configuration'
 
 const Todo = props => {
 
@@ -14,7 +14,7 @@ const Todo = props => {
       todo_completed: !props.todo.todo_completed
     }
 
-    axios.post('http://localhost:4000/todos/update/' + props.todo._id, obj)
+    axios.post(API_BASE_URL + '/todos/update/' + props.todo._id, obj)
       .then(window.location.reload(false))
 
   }
@@ -59,7 +59,7 @@ export default class TodosList extends Component {
   }
 
   componentDidMount() {
-    let endpoint = "http://localhost:4000/todos/"
+    let endpoint = API_BASE_URL + "/todos/"
     if (this.focusModeEnabled()) {
       endpoint += "?top=true"
       this.setState({focus: true})
