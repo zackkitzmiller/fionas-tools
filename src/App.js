@@ -15,13 +15,10 @@ class App extends Component {
       <Router>
         <div className="container">
           <nav className="navbar navbar-expand-lg navbar-light bg-light">
-            <a className="navbar-brand" href="http://z19r.com"><span role="img">📖</span></a>
-            <Link to="/" className="navbar-brand">Fiona's At-Home Learning Todos</Link>
+            <a className="navbar-brand" href="/"><span role="img">📖</span></a>
+            <Link to="/" className="navbar-brand">Fiona's At-Home Learning Tools</Link>
             <div className="collpase navbar-collapse">
               <ul className="navbar-nav mr-auto">
-                <li className="navbar-item">
-                  <Link to="/" className="nav-link">Todos</Link>
-                </li>
                 <li className="navbar-item">
                   <Link to="/create" className="nav-link">Create Todo</Link>
                 </li>
