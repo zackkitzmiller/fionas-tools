@@ -13,7 +13,11 @@ let Todo = require('./models/todo.model')
 app.use(cors())
 app.use(bodyParser.json())
 
-mongoose.connect(MONGO_DSN, { useNewUrlParser: true })
+mongoose.connect(MONGO_DSN, { 
+  useNewUrlParser: true, 
+  useUnifiedTopology: true,
+  useFindAndModify: false 
+})
 const connection = mongoose.connection
 
 connection.once('open', function() {
@@ -53,6 +57,12 @@ todoRoutes.route('/').get(function(req, res) {
 todoRoutes.route('/top').get(function(req, res) {
   Todo.find(function(err, todos) {
     res.json(topTodo(todos))
+  })
+})
+
+todoRoutes.route('/complete').get(function(req, res) {
+  Todo.find({todo_completed: true}, function(err, todos) {
+    res.json(todos)
   })
 })
 
