@@ -13,6 +13,10 @@ let Todo = new Schema({
   },
   todo_completed: {
     type: Boolean
+  },
+  todo_created_at: {
+    type: Date, 
+    default: Date.now
   }
 })
 
