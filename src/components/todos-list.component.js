@@ -15,7 +15,7 @@ const Todo = props => {
     }
 
     axios.post(API_BASE_URL + '/todos/update/' + props.todo._id, obj)
-      .then(window.location.reload(false))
+      .then(window.location.reload(true))
 
   }
 
