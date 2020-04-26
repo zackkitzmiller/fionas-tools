@@ -15,7 +15,9 @@ class App extends Component {
       <Router>
         <div className="container">
           <nav className="navbar navbar-expand-lg navbar-light bg-light">
-            <a className="navbar-brand" href="/"><span role="img">📖</span></a>
+            <a className="navbar-brand" href="/">
+              <span role="img" aria-label="books">📖</span>
+            </a>
             <Link to="/" className="navbar-brand">Fiona's At-Home Learning Tools</Link>
             <div className="collpase navbar-collapse">
               <ul className="navbar-nav mr-auto">
