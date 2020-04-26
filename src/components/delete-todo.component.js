@@ -37,7 +37,7 @@ export default class DeleteTodo extends Component {
     axios.post(API_BASE_URL + '/todos/delete/' + this.props.match.params.id)
       .then(res => console.log(res.data))
 
-    this.props.history.push('/')
+    window.location.reload(true)
   }
 
   render() {
