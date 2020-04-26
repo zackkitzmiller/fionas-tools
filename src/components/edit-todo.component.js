@@ -125,7 +125,7 @@ export default class EditTodo extends Component {
                       name="priorityOptions"
                       id="priorityHigh"
                       value="High"
-                      defaultChecked={this.state.todo_priority === 'High'}
+                      checked={this.state.todo_priority === 'High'}
                       onChange={this.onChangeTodoPriority}
                       />
               <label className="form-check-label">High</label>
