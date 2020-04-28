@@ -14,9 +14,15 @@ const Todo = props => {
       todo_completed: !props.todo.todo_completed
     }
 
-    axios.post(API_BASE_URL + '/todos/update/' + props.todo._id, obj)
-      .then(window.location.reload(true))
+    axios.post(`${API_BASE_URL}/todos/update/${props.todo._id}`, obj, {
+        headers: {
+          "Content-Type": "application/json;charset=UTF-8",
+          "Accept": "application/json, text/plain, */*"
+        }
+      })
+      .then(res => console.log(res.data))
 
+      window.location.reload(true)
   }
 
   return (

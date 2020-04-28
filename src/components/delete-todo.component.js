@@ -17,7 +17,7 @@ export default class DeleteTodo extends Component {
   }
 
   componentDidMount() {
-    axios.get(API_BASE_URL + '/todos/' + this.props.match.params.id)
+    axios.get(`${API_BASE_URL}/todos/${this.props.match.params.id}`)
       .then(response => {
         this.setState({
           todo_description: response.data.todo_description,
@@ -34,7 +34,11 @@ export default class DeleteTodo extends Component {
   onSubmit(e) {
     e.preventDefault()
     
-    axios.post(API_BASE_URL + '/todos/delete/' + this.props.match.params.id)
+    axios.post(`${API_BASE_URL}/todos/delete/${this.props.match.params.id}`, {
+      headers: {
+        "Content-Type": "application/json;charset=UTF-8",
+        "Accept": "application/json, text/plain, */*"
+      }})
       .then(res => console.log(res.data))
 
     window.location.reload(true)

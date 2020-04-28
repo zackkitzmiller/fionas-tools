@@ -22,7 +22,7 @@ export default class EditTodo extends Component {
   }
 
   componentDidMount() {
-    axios.get(API_BASE_URL + '/todos/' + this.props.match.params.id)
+    axios.get(`${API_BASE_URL}/todos/${this.props.match.params.id}`)
       .then(response => {
         this.setState({
           todo_description: response.data.todo_description,
@@ -69,8 +69,12 @@ export default class EditTodo extends Component {
       todo_completed: this.state.todo_completed
     }
 
-    axios.post(`${API_BASE_URL}/todos/update/${this.props.match.params.id}`, obj)
-      .then(res => console.log(res.data))
+    axios.post(`${API_BASE_URL}/todos/update/${this.props.match.params.id}`, obj, {
+      headers: {
+        "Content-Type": "application/json;charset=UTF-8",
+        "Accept": "application/json, text/plain, */*"
+        }}
+      ).then(res => console.log(res.data))
 
     window.location.href = '/'
   }

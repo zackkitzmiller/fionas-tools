@@ -47,8 +47,13 @@ export default class CreateTodo extends Component {
       todo_priority: this.state.todo_priority,
       todo_completed: this.state.todo_completed
     }
-    axios.post(API_BASE_URL + '/todos/add', newTodo)
-      .then(res => console.log(res.data))
+    axios.post(`${API_BASE_URL}/todos/add`, newTodo, {
+      headers: {
+        "Content-Type": "application/json;charset=UTF-8",
+        "Accept": "application/json, text/plain, */*"
+      }
+    })
+    .then(res => console.log(res.data))
 
     this.setState({
       todo_description: '',
