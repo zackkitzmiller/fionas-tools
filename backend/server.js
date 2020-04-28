@@ -54,6 +54,7 @@ todoRoutes.route('/').get(function(req, res) {
   })
 })
 
+todoRoutes.options(cors())
 todoRoutes.route('/top').get(function(req, res) {
   Todo.find(function(err, todos) {
     res.json(topTodo(todos))
